@@ -1,4 +1,7 @@
 const TelegramBot = require('node-telegram-bot-api');
+const ExcelJS = require("exceljs");
+const fs = require("fs");
+const path = require("path");
 const { abort } = require('process');
 
 // replace the value below with the Telegram token you receive from @BotFather
@@ -77,6 +80,12 @@ let javoblar = [
     {
         abc: ["C" , "B" , "C" , 5000, 75 , "D" , "D" , "D" , "A" , "C" , 80, 218 , "3/2" , "C", "C" , "B" , "D" , "C" , "D" , 684, "17/2" , "B", "A" , "D" , "A", "D" , "C" , "B", "D" , 100 , "B" , "C" , "D" , "C" , "C", "C", "C", "C" , "121/100" , "D" , "C" , "D", "C", "B" , "B" , "B" , "D" , "B", "C" , "D"]
     }
+
+]
+let javoblar_practike = [
+    {
+        abc: ["D" , "C" , "D", "B" , "D" , 1 , "C" , "A" , "C" , "4" , "C" , "D" , "B", "B" , "C" , "A" , "D" , "A" , "C" , "C" , "5/13" , "B" , "C" , "A" , "5/2" , "C" , "B" , 18 , "D" , "A" , "D" , "D" , "B" , "B" , "C" , "15/4" , "C" , "D" , "C" , 18 , "D" , "D" , "D" , "C"]
+    }
 ]
 
 
@@ -88,6 +97,7 @@ let javoblar = [
 
 
 let foydalanuvchi = [];
+let iddd = 1;
 
 bot.on('message', (msg) => {
     let bormi = false;
@@ -107,14 +117,75 @@ bot.on('message', (msg) => {
     let b = text.slice(0, 6);
     if (a[1] != undefined && b != 'lesson' && !bormi) {
         let ismcha = text.split(" ");
-        foydalanuvchi.push({chat_id: chatId, tg_nik: msg.chat.username, ism: ismcha[0], familiya: ismcha[1]})
-        console.log(foydalanuvchi);
+        foydalanuvchi.push({chat_id: chatId, id: iddd, tg_nik: msg.chat.username, ism: ismcha[0], familiya: ismcha[1]})
+        iddd++;
         bormi = true;
         bot.sendMessage(chatId,  ismcha[0] + ' '+ ismcha[1] +' test javoblaringizni yuboring!\nMasalan: lesson12*A*B*23.65*24/4*C*D*.....')
     }
     else {
-        if (bormi &&  b != 'lesson')  bot.sendMessage(chatId, 'Test kalitlarini bugun yuborasizmi??');
+        if (bormi &&  b != 'lesson' && b != 'practi' && text.slice(0,11) != 'OchilSimSim')  bot.sendMessage(chatId, 'Test kalitlarini bugun yuborasizmi??');
     }
+    
+    if ((b == 'practi' || b == 'PRACTI') && bormi) {
+        let proo = text.split("*");
+
+
+        if (proo.length != 45) {
+            
+            bot.sendMessage(chatId, "Test javoblarida kamchilik mavjud. \n Masalan: practice*A*B*23.65*24/4*C*D*.....\n(Malumot uchun: practice 44 ta testdan iborat)");
+        }
+        else {
+
+            let mesta1;
+            let borliq1 = true;
+            for(let i=1;i<=foydalanuvchi.length;i++){
+                if(foydalanuvchi[i-1].chat_id == chatId) mesta1 = i - 1;
+            }
+            
+            for (let key in foydalanuvchi[mesta1]) {
+                if('practice' == key) {
+                    borliq1 = false;
+                }
+            }
+
+            if(borliq1) {
+
+
+
+                let xatolar1 = [];
+                let umumiy1=0;
+                for(let i=1; i<=44;i++){
+                if(proo[i]==javoblar_practike[0].abc[i-1] || proo[i] == javoblar_practike[0].abc[i-1].toLowerCase()){ 
+                    umumiy1++;
+                }
+                else xatolar1.push(i);
+                }
+            
+                if((umumiy1/44) * 100 >= 75){
+                bot.sendMessage(chatId, "Sizning natijangiz:  " + umumiy1 +"/44\nXatolaringiz me'yorida :)");
+                
+                foydalanuvchi.forEach(user => {
+                    if (user.chat_id == chatId) {
+                        
+                        user.practice = umumiy1 +"/44 " + "(" +formatDate(msg.date) + ")";
+                        
+                        }
+                    });
+
+
+
+            }
+            else bot.sendMessage(chatId, "Sizning natijangiz:  " + umumiy1 +"/44\nXatolaringiz:"+ xatolar1 +"\nYana bir bor urinib ko'ring :)");
+            
+            console.log(foydalanuvchi);
+            }
+            else {
+                bot.sendMessage(chatId, "Siz bu Testni ilgari ishlagansiz.\nNatijangiz 75% dan baland bo'lganligi \nsababli qayta topshira olmaysiz!")
+            }
+        }
+    }
+        
+
     if (b == 'lesson' && bormi) {
         let less = text.slice(6,8);
         let sell = text.split("*");
@@ -126,7 +197,7 @@ bot.on('message', (msg) => {
         else lesson_number = Number(less);
         if ((lesson_number > 6 && lesson_number < 13) || lesson_number > 15) olcham = 50;
         if (lesson_number==0 || lesson_number > 24 || sell.length != olcham + 1) {
-            bot.sendMessage(chatId, "Test javoblarida kamchilik mavjud. \n Masalan: lesson12*A*B*23,65*24/4*C*D*.....\n( Malumot uchun: lesson"+ lesson_number + " -> " + olcham +" ta testdan iborat)");
+            bot.sendMessage(chatId, "Test javoblarida kamchilik mavjud. \n Masalan: lesson12*A*B*23.65*24/4*C*D*.....\n( Malumot uchun: lesson"+ lesson_number + " -> " + olcham +" ta testdan iborat)");
             
         }
         else {
@@ -149,43 +220,43 @@ bot.on('message', (msg) => {
                 let xatolar = [];
                 let umumiy=0;
                 for(let i=1; i<=olcham;i++){
-                if(sell[i]==javoblar[lesson_number-1].abc[i-1] || sell[i] == javoblar[lesson_number-1].abc[i-1].toLowerCase()){ 
+                if(sell[i]==javoblar[lesson_number-1].abc[i-1] || sell[i].toUpperCase() == javoblar[lesson_number-1].abc[i-1]){ 
                     umumiy++;
                 }
                 else xatolar.push(i);
                 }
             
                 if((umumiy/olcham) * 100 >= 75){
-                bot.sendMessage(chatId, "Sizning natijangiz:  " + umumiy +"/"+olcham +"\nXatolaringiz: Mavjud emas :)");
-                
+                bot.sendMessage(chatId, "Sizning natijangiz:  " + umumiy +"/"+olcham +"\nXatolaringiz me'yorida :)");
+                let sana = formatDate(msg.date);
                 foydalanuvchi.forEach(user => {
                     if (user.chat_id == chatId) {
                         
                         switch (lesson_number) {
-                            case 1:  user.lesson1 = umumiy +"/"+olcham; break;
-                            case 2:  user.lesson2 = umumiy +"/"+olcham; break;
-                            case 3:  user.lesson3 = umumiy +"/"+olcham; break;
-                            case 4:  user.lesson4 = umumiy +"/"+olcham; break;
-                            case 5:  user.lesson5 = umumiy +"/"+olcham; break;
-                            case 6:  user.lesson6 = umumiy +"/"+olcham; break;
-                            case 7:  user.lesson7 = umumiy +"/"+olcham; break;
-                            case 8:  user.lesson8 = umumiy +"/"+olcham; break;
-                            case 9:  user.lesson9 = umumiy +"/"+olcham; break;
-                            case 10:  user.lesson10 = umumiy +"/"+olcham; break;
-                            case 11:  user.lesson11 = umumiy +"/"+olcham; break;
-                            case 12:  user.lesson12 = umumiy +"/"+olcham; break;
-                            case 13:  user.lesson13 = umumiy +"/"+olcham; break;
-                            case 14:  user.lesson14 = umumiy +"/"+olcham; break;
-                            case 15:  user.lesson15 = umumiy +"/"+olcham; break;
-                            case 16:  user.lesson16 = umumiy +"/"+olcham; break;
-                            case 17:  user.lesson17 = umumiy +"/"+olcham; break;
-                            case 18:  user.lesson18 = umumiy +"/"+olcham; break;
-                            case 19:  user.lesson19 = umumiy +"/"+olcham; break;
-                            case 20:  user.lesson20 = umumiy +"/"+olcham; break;
-                            case 21:  user.lesson21 = umumiy +"/"+olcham; break;
-                            case 22:  user.lesson22 = umumiy +"/"+olcham; break;
-                            case 23:  user.lesson23 = umumiy +"/"+olcham; break;
-                            case 24:  user.lesson24 = umumiy +"/"+olcham; break;
+                            case 1:  user.lesson1 = umumiy +"/"+olcham + " (" + sana + ")"; break;
+                            case 2:  user.lesson2 = umumiy +"/"+olcham + " (" + sana + ")"; break;
+                            case 3:  user.lesson3 = umumiy +"/"+olcham + " (" + sana + ")"; break;
+                            case 4:  user.lesson4 = umumiy +"/"+olcham + " (" + sana + ")"; break;
+                            case 5:  user.lesson5 = umumiy +"/"+olcham + " (" + sana + ")"; break;
+                            case 6:  user.lesson6 = umumiy +"/"+olcham + " (" + sana + ")"; break;
+                            case 7:  user.lesson7 = umumiy +"/"+olcham + " (" + sana + ")"; break;
+                            case 8:  user.lesson8 = umumiy +"/"+olcham + " (" + sana + ")"; break;
+                            case 9:  user.lesson9 = umumiy +"/"+olcham + " (" + sana + ")"; break;
+                            case 10:  user.lesson10 = umumiy +"/"+olcham + " (" + sana + ")"; break;
+                            case 11:  user.lesson11 = umumiy +"/"+olcham + " (" + sana + ")"; break;
+                            case 12:  user.lesson12 = umumiy +"/"+olcham + " (" + sana + ")"; break;
+                            case 13:  user.lesson13 = umumiy +"/"+olcham + " (" + sana + ")"; break;
+                            case 14:  user.lesson14 = umumiy +"/"+olcham + " (" + sana + ")"; break;
+                            case 15:  user.lesson15 = umumiy +"/"+olcham + " (" + sana + ")"; break;
+                            case 16:  user.lesson16 = umumiy +"/"+olcham + " (" + sana + ")"; break;
+                            case 17:  user.lesson17 = umumiy +"/"+olcham + " (" + sana + ")"; break;
+                            case 18:  user.lesson18 = umumiy +"/"+olcham + " (" + sana + ")"; break;
+                            case 19:  user.lesson19 = umumiy +"/"+olcham + " (" + sana + ")"; break;
+                            case 20:  user.lesson20 = umumiy +"/"+olcham + " (" + sana + ")"; break;
+                            case 21:  user.lesson21 = umumiy +"/"+olcham + " (" + sana + ")"; break;
+                            case 22:  user.lesson22 = umumiy +"/"+olcham + " (" + sana + ")"; break;
+                            case 23:  user.lesson23 = umumiy +"/"+olcham + " (" + sana + ")"; break;
+                            case 24:  user.lesson24 = umumiy +"/"+olcham + " (" + sana + ")"; break;
                         }
                     }
                 });
@@ -201,7 +272,7 @@ bot.on('message', (msg) => {
         
            
             
-            console.log(foydalanuvchi);
+            
             }
             else {
                 bot.sendMessage(chatId, "Siz bu Testni ilgari ishlagansiz.\nNatijangiz 75% dan baland bo'lganligi \nsababli qayta topshira olmaysiz!")
@@ -209,14 +280,178 @@ bot.on('message', (msg) => {
         }
     }
     else {
-        if (text[0] != '/' && !bormi) {
+        if (text[0] != '/' && !bormi && text.slice(0,11) != 'OchilSimSim') {
             bot.sendMessage(chatId, 'Ism Familiyani togri kiriting! \n Namuna: Dilshodbek Bahodirov')
             
         }
         else if(bormi && text[0]=='/') bot.sendMessage(chatId, "Test javoblaringizni to'gri yuboring!\n Masalan: lesson12*A*B*23.65*24/4*C*D*.....");
     }
+    
 });
 
-bot.on('polling_error', (error) => {
-    console.log(error);
+bot.on("polling_error", (error) => {
+    console.error("Polling Error:", error.code, error.response?.body || error.message);
 });
+
+function formatDate(a) {
+    // Vaqtni millisekundlarga o'tkazish
+    const date = new Date(a * 1000);
+
+    // Sana va vaqtni chiqarish
+    const yil = date.getFullYear();
+    const oy = String(date.getMonth() + 1).padStart(2, "0"); // Oy 0 dan boshlanadi
+    const kun = String(date.getDate()).padStart(2, "0");
+    const soat = String(date.getHours()).padStart(2, "0");
+    const minut = String(date.getMinutes()).padStart(2, "0");
+    
+
+    return `${yil}-${oy}-${kun} ${soat}:${minut}`;
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+bot.on('message', (msg) => {
+
+
+    if(msg.text == 'OchilSimSim'){
+
+
+        
+
+        // Fayl nomi
+        const filePath = "Natijalar.xlsx";
+        
+        // Faylni o'chirish
+        fs.unlink(filePath, (err) => {
+            if (err) {
+                console.error("❌ Faylni o‘chirishda xatolik:", err);
+            } else {
+                console.log("✅ Fayl muvaffaqiyatli o‘chirildi!");
+            }
+        });
+        
+        
+
+        async function createExcel() {
+        const workbook = new ExcelJS.Workbook();
+        const worksheet = workbook.addWorksheet("Natijalar");
+
+        // 1️⃣ Ustunlarni belgilash
+        worksheet.columns = [
+            
+            { header: "№", key: "id", width:5},
+            { header: "Ism", key: "ism", width: 25},
+            { header: "Familiya", key: "familiya", width: 25 },
+            { header: "Telegram Nick", key: "tg_nik", width: 22 },
+            { header: "Lesson 1", key: "lesson1", width: 22 },
+            { header: "Lesson 2", key: "lesson2", width: 22 },
+            { header: "Lesson 3", key: "lesson3", width: 22 },
+            { header: "Lesson 4", key: "lesson4", width: 22 },
+            { header: "Lesson 5", key: "lesson5", width: 22 },
+            { header: "Lesson 6", key: "lesson6", width: 22 },
+            { header: "Lesson 7", key: "lesson7", width: 22 },
+            { header: "Lesson 8", key: "lesson8", width: 22 },
+            { header: "Lesson 9", key: "lesson9", width: 22 },
+            { header: "Lesson 10", key: "lesson10", width: 22 },
+            { header: "Lesson 11", key: "lesson11", width: 22 },
+            { header: "Lesson 12", key: "lesson12", width: 22 },
+            { header: "Practice Test", key: "practice", width: 22 },
+            { header: "Lesson 13", key: "lesson13", width: 22 },
+            { header: "Lesson 14", key: "lesson14", width: 22 },
+            { header: "Lesson 15", key: "lesson15", width: 22 },
+            { header: "Lesson 16", key: "lesson16", width: 22 },
+            { header: "Lesson 17", key: "lesson17", width: 22 },
+            { header: "Lesson 18", key: "lesson18", width: 22 },
+            { header: "Lesson 19", key: "lesson19", width: 22 },
+            { header: "Lesson 20", key: "lesson20", width: 22 },
+            { header: "Lesson 21", key: "lesson21", width: 22 },
+            { header: "Lesson 22", key: "lesson22", width: 22 },
+            { header: "Lesson 23", key: "lesson23", width: 22 },
+            { header: "Lesson 24", key: "lesson24", width: 22 }
+            
+            
+        ];
+
+
+        worksheet.getRow(1).eachCell((cell) => {
+            cell.font = { bold: true, color: { argb: "FFFFFF" }, size: 14 }; // Oq rang
+            cell.fill = {
+                type: "pattern",
+                pattern: "solid",
+                fgColor: { argb: "0074D9" } // Moviy fon
+            };
+            cell.alignment = { horizontal: "center" };
+            cell.border = {
+                top: { style: "thin" },
+                left: { style: "thin" },
+                bottom: { style: "thin" },
+                right: { style: "thin" }
+            };
+        });
+    // 2️⃣ Ma'lumotlar
+        
+
+            // 3️⃣ Har bir obyektni qo‘shish
+            foydalanuvchi.forEach((row) => {
+                worksheet.addRow(row);
+            });
+
+            // 4️⃣ Faylni saqlash
+            await workbook.xlsx.writeFile("Natijalar.xlsx");
+            
+        }
+
+
+            createExcel();
+
+
+
+
+
+
+            function yuborish() {
+
+
+                
+                const chatId = msg.chat.id;
+
+                
+                const filePath2 = path.join(__dirname, "Natijalar.xlsx");
+
+                // Faylni yuborish
+                bot.sendDocument(chatId, fs.createReadStream(filePath2),{
+                    contentType: "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet"
+                })
+                    .then(() => {
+                        console.log("✅ Fayl yuborildi!");
+                    })
+                    .catch((err) => {
+                        console.error("❌ Xatolik yuz berdi333333:", err);
+                    });
+
+            }
+
+            setTimeout(yuborish, 2000);
+          
+            
+            
+
+            
+           
+
+
+
+    }
+})
