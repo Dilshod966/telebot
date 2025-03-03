@@ -6,7 +6,7 @@ const { abort } = require('process');
 const { text } = require('stream/consumers');
 
 // replace the value below with the Telegram token you receive from @BotFather
-const token = '7215925249:AAFrqzF_q-nCqQ07KYJ6tHwlbNyuay0-hm0';
+const token = '7215925249:AAG4NrInzF7R0YFkobEIFdQ4whWKFcuYaRg';
 
 // Create a bot that uses 'polling' to fetch new updates
 const bot = new TelegramBot(token, {polling: true});
@@ -256,13 +256,131 @@ bot.on('callback_query', msg => {
     let borliq1 = false;
     let muom = ishlajak_testi - 1;
     let soni = javoblar[muom].abc.length;
+    let ota_olmadi = true;
+
+
+
     
+    switch(Number(ishlajak_testi)) {
+        case 1:  {
+            if(foydalanuvchi[index-1].lesson1 != undefined){
+                let a = foydalanuvchi[index - 1].lesson1;
+                if(a[0] == "Y") ota_olmadi = false}}; break;
+        case 2:  {
+            if(foydalanuvchi[index-1].lesson2 != undefined){
+            let a = foydalanuvchi[index - 1].lesson2;
+            if(a[0] == "Y") ota_olmadi = false}}; break;
+            case 1:  {
+                if(foydalanuvchi[index-1].lesson1 != undefined){
+                    let a = foydalanuvchi[index - 1].lesson1;
+                    if(a[0] == "Y") ota_olmadi = false}}; break;
+            case 3:  {
+                if(foydalanuvchi[index-1].lesson3 != undefined){
+                let a = foydalanuvchi[index - 1].lesson3;
+                if(a[0] == "Y") ota_olmadi = false}}; break;
+                case 4:  {
+                    if(foydalanuvchi[index-1].lesson4 != undefined){
+                        let a = foydalanuvchi[index - 1].lesson4;
+                        if(a[0] == "Y") ota_olmadi = false}}; break;
+                case 4:  {
+                    if(foydalanuvchi[index-1].lesson4 != undefined){
+                    let a = foydalanuvchi[index - 1].lesson4;
+                    if(a[0] == "Y") ota_olmadi = false}}; break;
+                    case 5:  {
+                        if(foydalanuvchi[index-1].lesson5 != undefined){
+                            let a = foydalanuvchi[index - 1].lesson5;
+                            if(a[0] == "Y") ota_olmadi = false}}; break;
+                    case 6:  {
+                        if(foydalanuvchi[index-1].lesson6 != undefined){
+                        let a = foydalanuvchi[index - 1].lesson6;
+                        if(a[0] == "Y") ota_olmadi = false}}; break;
+                        case 7:  {
+                            if(foydalanuvchi[index-1].lesson7 != undefined){
+                                let a = foydalanuvchi[index - 1].lesson7;
+                                if(a[0] == "Y") ota_olmadi = false}}; break;
+                        case 8:  {
+                            if(foydalanuvchi[index-1].lesson8 != undefined){
+                            let a = foydalanuvchi[index - 1].lesson8;
+                            if(a[0] == "Y") ota_olmadi = false}}; break;
+                            case 9:  {
+                                if(foydalanuvchi[index-1].lesson9 != undefined){
+                                    let a = foydalanuvchi[index - 1].lesson9;
+                                    if(a[0] == "Y") ota_olmadi = false}}; break;
+                            case 10:  {
+                                if(foydalanuvchi[index-1].lesson10 != undefined){
+                                let a = foydalanuvchi[index - 1].lesson10;
+                                if(a[0] == "Y") ota_olmadi = false}}; break;
+                                case 11:  {
+                                    if(foydalanuvchi[index-1].lesson11 != undefined){
+                                        let a = foydalanuvchi[index - 1].lesson11;
+                                        if(a[0] == "Y") ota_olmadi = false}}; break;
+                                case 12:  {
+                                    if(foydalanuvchi[index-1].lesson12 != undefined){
+                                    let a = foydalanuvchi[index - 1].lesson12;
+                                    if(a[0] == "Y") ota_olmadi = false}}; break;
+                                    case 13:  {
+                                        if(foydalanuvchi[index-1].lesson13 != undefined){
+                                            let a = foydalanuvchi[index - 1].lesson13;
+                                            if(a[0] == "Y") ota_olmadi = false}}; break;
+                                    case 14:  {
+                                        if(foydalanuvchi[index-1].lesson14 != undefined){
+                                        let a = foydalanuvchi[index - 1].lesson14;
+                                        if(a[0] == "Y") ota_olmadi = false}}; break;
+                                        case 15:  {
+                                            if(foydalanuvchi[index-1].lesson15 != undefined){
+                                                let a = foydalanuvchi[index - 1].lesson15;
+                                                if(a[0] == "Y") ota_olmadi = false}}; break;
+                                        case 16:  {
+                                            if(foydalanuvchi[index-1].lesson16 != undefined){
+                                            let a = foydalanuvchi[index - 1].lesson16;
+                                            if(a[0] == "Y") ota_olmadi = false}}; break;
+                                            case 17:  {
+                                                if(foydalanuvchi[index-1].lesson17 != undefined){
+                                                    let a = foydalanuvchi[index - 1].lesson17;
+                                                    if(a[0] == "Y") ota_olmadi = false}}; break;
+                                            case 18:  {
+                                                if(foydalanuvchi[index-1].lesson18 != undefined){
+                                                let a = foydalanuvchi[index - 1].lesson18;
+                                                if(a[0] == "Y") ota_olmadi = false}}; break;
+                                                case 19:  {
+                                                    if(foydalanuvchi[index-1].lesson19 != undefined){
+                                                        let a = foydalanuvchi[index - 1].lesson19;
+                                                        if(a[0] == "Y") ota_olmadi = false}}; break;
+                                                case 20:  {
+                                                    if(foydalanuvchi[index-1].lesson20 != undefined){
+                                                    let a = foydalanuvchi[index - 1].lesson20;
+                                                    if(a[0] == "Y") ota_olmadi = false}}; break;
+                                                    case 21:  {
+                                                        if(foydalanuvchi[index-1].lesson21 != undefined){
+                                                            let a = foydalanuvchi[index - 1].lesson21;
+                                                            if(a[0] == "Y") ota_olmadi = false}}; break;
+                                                    case 22:  {
+                                                        if(foydalanuvchi[index-1].lesson22 != undefined){
+                                                        let a = foydalanuvchi[index - 1].lesson22;
+                                                        if(a[0] == "Y") ota_olmadi = false}}; break;
+                                                        case 23:  {
+                                                            if(foydalanuvchi[index-1].lesson23 != undefined){
+                                                            let a = foydalanuvchi[index - 1].lesson23;
+                                                            if(a[0] == "Y") ota_olmadi = false}}; break;
+                                                            case 24:  {
+                                                                if(foydalanuvchi[index-1].lesson24 != undefined){
+                                                                let a = foydalanuvchi[index - 1].lesson24;
+                                                                if(a[0] == "Y") ota_olmadi = false}}; break;
+                                                                case 25:  {
+                                                                    if(foydalanuvchi[index-1].lesson25 != undefined){
+                                                                    let a = foydalanuvchi[index - 1].lesson25;
+                                                                    if(a[0] == "Y") ota_olmadi = false}}; break;
+    }
+    
+
+
+
         for (let key in foydalanuvchi[index - 1]) 
         {   
             
             
             
-            if( 'lesson'+ ishlajak_testi == key) {
+            if( 'lesson'+ ishlajak_testi == key  && ota_olmadi) {
                 bot.sendMessage(chatId, '📌 Siz ushbu testga javob bergansiz.\nQayta javob bera olmaysiz');
                 borliq1 = true;
                 }
@@ -341,20 +459,135 @@ bot.on('message', (msg) => {
 
 
 
-    console.log(ishlajak_testi);
 
     if(ishlajak_testi != 0 && ishlajak_testi != undefined) {
         let lesson_ishlajak;
         let muom = ishlajak_testi - 1;
         let soni = javoblar[muom].abc.length;
         lesson_ishlajak = 'lesson' + ishlajak_testi;
-        
+        let ota_olmadi = true;
+
+
+
 
         
+            switch(Number(ishlajak_testi)) {
+                case 1:  {
+                    if(foydalanuvchi[index-1].lesson1 != undefined){
+                        let a = foydalanuvchi[index - 1].lesson1;
+                        if(a[0] == "Y") ota_olmadi = false}}; break;
+                case 2:  {
+                    if(foydalanuvchi[index-1].lesson2 != undefined){
+                    let a = foydalanuvchi[index - 1].lesson2;
+                    if(a[0] == "Y") ota_olmadi = false}}; break;
+                    case 1:  {
+                        if(foydalanuvchi[index-1].lesson1 != undefined){
+                            let a = foydalanuvchi[index - 1].lesson1;
+                            if(a[0] == "Y") ota_olmadi = false}}; break;
+                    case 3:  {
+                        if(foydalanuvchi[index-1].lesson3 != undefined){
+                        let a = foydalanuvchi[index - 1].lesson3;
+                        if(a[0] == "Y") ota_olmadi = false}}; break;
+                        case 4:  {
+                            if(foydalanuvchi[index-1].lesson4 != undefined){
+                                let a = foydalanuvchi[index - 1].lesson4;
+                                if(a[0] == "Y") ota_olmadi = false}}; break;
+                        case 4:  {
+                            if(foydalanuvchi[index-1].lesson4 != undefined){
+                            let a = foydalanuvchi[index - 1].lesson4;
+                            if(a[0] == "Y") ota_olmadi = false}}; break;
+                            case 5:  {
+                                if(foydalanuvchi[index-1].lesson5 != undefined){
+                                    let a = foydalanuvchi[index - 1].lesson5;
+                                    if(a[0] == "Y") ota_olmadi = false}}; break;
+                            case 6:  {
+                                if(foydalanuvchi[index-1].lesson6 != undefined){
+                                let a = foydalanuvchi[index - 1].lesson6;
+                                if(a[0] == "Y") ota_olmadi = false}}; break;
+                                case 7:  {
+                                    if(foydalanuvchi[index-1].lesson7 != undefined){
+                                        let a = foydalanuvchi[index - 1].lesson7;
+                                        if(a[0] == "Y") ota_olmadi = false}}; break;
+                                case 8:  {
+                                    if(foydalanuvchi[index-1].lesson8 != undefined){
+                                    let a = foydalanuvchi[index - 1].lesson8;
+                                    if(a[0] == "Y") ota_olmadi = false}}; break;
+                                    case 9:  {
+                                        if(foydalanuvchi[index-1].lesson9 != undefined){
+                                            let a = foydalanuvchi[index - 1].lesson9;
+                                            if(a[0] == "Y") ota_olmadi = false}}; break;
+                                    case 10:  {
+                                        if(foydalanuvchi[index-1].lesson10 != undefined){
+                                        let a = foydalanuvchi[index - 1].lesson10;
+                                        if(a[0] == "Y") ota_olmadi = false}}; break;
+                                        case 11:  {
+                                            if(foydalanuvchi[index-1].lesson11 != undefined){
+                                                let a = foydalanuvchi[index - 1].lesson11;
+                                                if(a[0] == "Y") ota_olmadi = false}}; break;
+                                        case 12:  {
+                                            if(foydalanuvchi[index-1].lesson12 != undefined){
+                                            let a = foydalanuvchi[index - 1].lesson12;
+                                            if(a[0] == "Y") ota_olmadi = false}}; break;
+                                            case 13:  {
+                                                if(foydalanuvchi[index-1].lesson13 != undefined){
+                                                    let a = foydalanuvchi[index - 1].lesson13;
+                                                    if(a[0] == "Y") ota_olmadi = false}}; break;
+                                            case 14:  {
+                                                if(foydalanuvchi[index-1].lesson14 != undefined){
+                                                let a = foydalanuvchi[index - 1].lesson14;
+                                                if(a[0] == "Y") ota_olmadi = false}}; break;
+                                                case 15:  {
+                                                    if(foydalanuvchi[index-1].lesson15 != undefined){
+                                                        let a = foydalanuvchi[index - 1].lesson15;
+                                                        if(a[0] == "Y") ota_olmadi = false}}; break;
+                                                case 16:  {
+                                                    if(foydalanuvchi[index-1].lesson16 != undefined){
+                                                    let a = foydalanuvchi[index - 1].lesson16;
+                                                    if(a[0] == "Y") ota_olmadi = false}}; break;
+                                                    case 17:  {
+                                                        if(foydalanuvchi[index-1].lesson17 != undefined){
+                                                            let a = foydalanuvchi[index - 1].lesson17;
+                                                            if(a[0] == "Y") ota_olmadi = false}}; break;
+                                                    case 18:  {
+                                                        if(foydalanuvchi[index-1].lesson18 != undefined){
+                                                        let a = foydalanuvchi[index - 1].lesson18;
+                                                        if(a[0] == "Y") ota_olmadi = false}}; break;
+                                                        case 19:  {
+                                                            if(foydalanuvchi[index-1].lesson19 != undefined){
+                                                                let a = foydalanuvchi[index - 1].lesson19;
+                                                                if(a[0] == "Y") ota_olmadi = false}}; break;
+                                                        case 20:  {
+                                                            if(foydalanuvchi[index-1].lesson20 != undefined){
+                                                            let a = foydalanuvchi[index - 1].lesson20;
+                                                            if(a[0] == "Y") ota_olmadi = false}}; break;
+                                                            case 21:  {
+                                                                if(foydalanuvchi[index-1].lesson21 != undefined){
+                                                                    let a = foydalanuvchi[index - 1].lesson21;
+                                                                    if(a[0] == "Y") ota_olmadi = false}}; break;
+                                                            case 22:  {
+                                                                if(foydalanuvchi[index-1].lesson22 != undefined){
+                                                                let a = foydalanuvchi[index - 1].lesson22;
+                                                                if(a[0] == "Y") ota_olmadi = false}}; break;
+                                                                case 23:  {
+                                                                    if(foydalanuvchi[index-1].lesson23 != undefined){
+                                                                    let a = foydalanuvchi[index - 1].lesson23;
+                                                                    if(a[0] == "Y") ota_olmadi = false}}; break;
+                                                                    case 24:  {
+                                                                        if(foydalanuvchi[index-1].lesson24 != undefined){
+                                                                        let a = foydalanuvchi[index - 1].lesson24;
+                                                                        if(a[0] == "Y") ota_olmadi = false}}; break;
+                                                                        case 25:  {
+                                                                            if(foydalanuvchi[index-1].lesson25 != undefined){
+                                                                            let a = foydalanuvchi[index - 1].lesson25;
+                                                                            if(a[0] == "Y") ota_olmadi = false}}; break;
+            }
+            
+
+        
+
         for (let key in foydalanuvchi[index - 1]) 
             {
-                if( lesson_ishlajak == key && text != '/start') {
-                    
+                if( lesson_ishlajak == key && text != '/start' && ota_olmadi) {
                     
                     bot.sendMessage(chatId, '📌 Siz ushbu testga javob bergansiz.\nQayta javob bera olmaysiz');
                     lesson_ishlajak2 = true;
@@ -384,42 +617,42 @@ bot.on('message', (msg) => {
                 }
                 else xatolar.push('   ' + i + ' ❌ ')
             }
-
+            let sana = formatDate(msg.date);
             if(umumiy/soni >= 0.75) {
-                bot.sendMessage(chatId, 'Sizning natijangiz:  ' + ((umumiy*100)/soni).toFixed(1) + '% 😁\nNatijangiz qabul qilindi✅\nBoshqa lessonlarni teshkirish uchun 👉 /start');
+                bot.sendMessage(chatId, 'Sizning natijangiz:  ' + ((umumiy*100)/soni).toFixed(1) + '% 😁\nNatijangiz qabul qilindi✅\n ' + xatolar +'\nBoshqa lessonlarni teshkirish uchun 👉 /start');
 
 
-                let sana = formatDate(msg.date);
+                
 
                 foydalanuvchi.forEach(user => {
                                         if (user.chat_id == chatId) {
                                             
                                             switch (Number(ishlajak_testi)) {
-                                                case 1:  user.lesson1 = (umumiy*100/soni).toFixed(1) + "% (" + sana + ")"; break;
-                                                case 2:  user.lesson2 = (umumiy*100/soni).toFixed(1) + "% (" + sana + ")"; break;
-                                                case 3:  user.lesson3 = (umumiy*100/soni).toFixed(1) + "% (" + sana + ")"; break;
-                                                case 4:  user.lesson4 = (umumiy*100/soni).toFixed(1) + "% (" + sana + ")"; break;
-                                                case 5:  user.lesson5 = (umumiy*100/soni).toFixed(1) + "% (" + sana + ")"; break;
-                                                case 6:  user.lesson6 = (umumiy*100/soni).toFixed(1) + "% (" + sana + ")"; break;
-                                                case 7:  user.lesson7 = (umumiy*100/soni).toFixed(1) + "% (" + sana + ")"; break;
-                                                case 8:  user.lesson8 = (umumiy*100/soni).toFixed(1) + "% (" + sana + ")"; break;
-                                                case 9:  user.lesson9 = (umumiy*100/soni).toFixed(1) + "% (" + sana + ")"; break;
-                                                case 10:  user.lesson10 = (umumiy*100/soni).toFixed(1) + "% (" + sana + ")"; break;
-                                                case 11:  user.lesson11 = (umumiy*100/soni).toFixed(1) + "% (" + sana + ")"; break;
-                                                case 12:  user.lesson12 = (umumiy*100/soni).toFixed(1) + "% (" + sana + ")"; break;
-                                                case 13:  user.lesson13 = (umumiy*100/soni).toFixed(1) + "% (" + sana + ")"; break;
-                                                case 14:  user.lesson14 = (umumiy*100/soni).toFixed(1) + "% (" + sana + ")"; break;
-                                                case 15:  user.lesson15 = (umumiy*100/soni).toFixed(1) + "% (" + sana + ")"; break;
-                                                case 16:  user.lesson16 = (umumiy*100/soni).toFixed(1) + "% (" + sana + ")"; break;
-                                                case 17:  user.lesson17 = (umumiy*100/soni).toFixed(1) + "% (" + sana + ")"; break;
-                                                case 18:  user.lesson18 = (umumiy*100/soni).toFixed(1) + "% (" + sana + ")"; break;
-                                                case 19:  user.lesson19 = (umumiy*100/soni).toFixed(1) + "% (" + sana + ")"; break;
-                                                case 20:  user.lesson20 = (umumiy*100/soni).toFixed(1) + "% (" + sana + ")"; break;
-                                                case 21:  user.lesson21 = (umumiy*100/soni).toFixed(1) + "% (" + sana + ")"; break;
-                                                case 22:  user.lesson22 = (umumiy*100/soni).toFixed(1) + "% (" + sana + ")"; break;
-                                                case 23:  user.lesson23 = (umumiy*100/soni).toFixed(1) + "% (" + sana + ")"; break;
-                                                case 24:  user.lesson24 = (umumiy*100/soni).toFixed(1) + "% (" + sana + ")"; break;
-                                                case 25:  user.lesson25 = (umumiy*100/soni).toFixed(1) + "% (" + sana + ")"; break;
+                                                case 1:  user.lesson1 = (umumiy*100/soni).toFixed(1) + "% " + sana; break;
+                                                case 2:  user.lesson2 = (umumiy*100/soni).toFixed(1) + "% " + sana; break;
+                                                case 3:  user.lesson3 = (umumiy*100/soni).toFixed(1) + "% " + sana; break;
+                                                case 4:  user.lesson4 = (umumiy*100/soni).toFixed(1) + "% " + sana; break;
+                                                case 5:  user.lesson5 = (umumiy*100/soni).toFixed(1) + "% " + sana; break;
+                                                case 6:  user.lesson6 = (umumiy*100/soni).toFixed(1) + "% " + sana; break;
+                                                case 7:  user.lesson7 = (umumiy*100/soni).toFixed(1) + "% " + sana; break;
+                                                case 8:  user.lesson8 = (umumiy*100/soni).toFixed(1) + "% " + sana; break;
+                                                case 9:  user.lesson9 = (umumiy*100/soni).toFixed(1) + "% " + sana; break;
+                                                case 10:  user.lesson10 = (umumiy*100/soni).toFixed(1) + "% " + sana; break;
+                                                case 11:  user.lesson11 = (umumiy*100/soni).toFixed(1) + "% " + sana; break;
+                                                case 12:  user.lesson12 = (umumiy*100/soni).toFixed(1) + "% " + sana; break;
+                                                case 13:  user.lesson13 = (umumiy*100/soni).toFixed(1) + "% " + sana; break;
+                                                case 14:  user.lesson14 = (umumiy*100/soni).toFixed(1) + "% " + sana; break;
+                                                case 15:  user.lesson15 = (umumiy*100/soni).toFixed(1) + "% " + sana; break;
+                                                case 16:  user.lesson16 = (umumiy*100/soni).toFixed(1) + "% " + sana; break;
+                                                case 17:  user.lesson17 = (umumiy*100/soni).toFixed(1) + "% " + sana; break;
+                                                case 18:  user.lesson18 = (umumiy*100/soni).toFixed(1) + "% " + sana; break;
+                                                case 19:  user.lesson19 = (umumiy*100/soni).toFixed(1) + "% " + sana; break;
+                                                case 20:  user.lesson20 = (umumiy*100/soni).toFixed(1) + "% " + sana; break;
+                                                case 21:  user.lesson21 = (umumiy*100/soni).toFixed(1) + "% " + sana; break;
+                                                case 22:  user.lesson22 = (umumiy*100/soni).toFixed(1) + "% " + sana; break;
+                                                case 23:  user.lesson23 = (umumiy*100/soni).toFixed(1) + "% " + sana; break;
+                                                case 24:  user.lesson24 = (umumiy*100/soni).toFixed(1) + "% " + sana; break;
+                                                case 25:  user.lesson25 = (umumiy*100/soni).toFixed(1) + "% " + sana; break;
                                             }
                                         }
                                     });
@@ -428,13 +661,57 @@ bot.on('message', (msg) => {
                 
             }
             else {
-                bot.sendMessage(chatId, 'Sizning natijangiz:  ' + (umumiy*100/soni).toFixed(1) + '% 😔\n'+ xatolar + '\nYana bir bor urunib koring.  👉 /start');
+                bot.sendMessage(chatId, 'Sizning natijangiz:  ' + (umumiy*100/soni).toFixed(1) + '% 😔\nYana bir bor urunib koring.  👉 /start');
                 
+
+
+
+                foydalanuvchi.forEach(user => {
+                    if (user.chat_id == chatId) {
+                        
+                        switch (Number(ishlajak_testi)) {
+                            case 1:  user.lesson1 = "Yomon Natija (" + (umumiy*100/soni).toFixed(1) + "%) " + sana; break;
+                            case 2:  user.lesson2 = "Yomon Natija (" + (umumiy*100/soni).toFixed(1) + "%) " + sana; break;
+                            case 3:  user.lesson3 = "Yomon Natija (" + (umumiy*100/soni).toFixed(1) + "%) " + sana; break;
+                            case 4:  user.lesson4 = "Yomon Natija (" + (umumiy*100/soni).toFixed(1) + "%) " + sana; break;
+                            case 5:  user.lesson5 = "Yomon Natija (" + (umumiy*100/soni).toFixed(1) + "%) " + sana; break;
+                            case 6:  user.lesson6 = "Yomon Natija (" + (umumiy*100/soni).toFixed(1) + "%) " + sana; break;
+                            case 7:  user.lesson7 = "Yomon Natija (" + (umumiy*100/soni).toFixed(1) + "%) " + sana; break;
+                            case 8:  user.lesson8 = "Yomon Natija (" + (umumiy*100/soni).toFixed(1) + "%) " + sana; break;
+                            case 9:  user.lesson9 = "Yomon Natija (" + (umumiy*100/soni).toFixed(1) + "%) " + sana; break;
+                            case 10:  user.lesson10 = "Yomon Natija (" + (umumiy*100/soni).toFixed(1) + "%) " + sana; break;
+                            case 11:  user.lesson11 = "Yomon Natija (" + (umumiy*100/soni).toFixed(1) + "%) " + sana; break;
+                            case 12:  user.lesson12 = "Yomon Natija (" + (umumiy*100/soni).toFixed(1) + "%) " + sana; break;
+                            case 13:  user.lesson13 = "Yomon Natija (" + (umumiy*100/soni).toFixed(1) + "%) " + sana; break;
+                            case 14:  user.lesson14 = "Yomon Natija (" + (umumiy*100/soni).toFixed(1) + "%) " + sana; break;
+                            case 15:  user.lesson15 = "Yomon Natija (" + (umumiy*100/soni).toFixed(1) + "%) " + sana; break;
+                            case 16:  user.lesson16 = "Yomon Natija (" + (umumiy*100/soni).toFixed(1) + "%) " + sana; break;
+                            case 17:  user.lesson17 = "Yomon Natija (" + (umumiy*100/soni).toFixed(1) + "%) " + sana; break;
+                            case 18:  user.lesson18 = "Yomon Natija (" + (umumiy*100/soni).toFixed(1) + "%) " + sana; break;
+                            case 19:  user.lesson19 = "Yomon Natija (" + (umumiy*100/soni).toFixed(1) + "%) " + sana; break;
+                            case 20:  user.lesson20 = "Yomon Natija (" + (umumiy*100/soni).toFixed(1) + "%) " + sana; break;
+                            case 21:  user.lesson21 = "Yomon Natija (" + (umumiy*100/soni).toFixed(1) + "%) " + sana; break;
+                            case 22:  user.lesson22 = "Yomon Natija (" + (umumiy*100/soni).toFixed(1) + "%) " + sana; break;
+                            case 23:  user.lesson23 = "Yomon Natija (" + (umumiy*100/soni).toFixed(1) + "%) " + sana; break;
+                            case 24:  user.lesson24 = "Yomon Natija (" + (umumiy*100/soni).toFixed(1) + "%) " + sana; break;
+                            case 25:  user.lesson25 = "Yomon Natija (" + (umumiy*100/soni).toFixed(1) + "%) " + sana; break;
+                        }
+                    }
+                });
+
+
+
+
             }
         }
     }
+
+
+
     }
 
+
+    
    
 
 
@@ -490,7 +767,24 @@ function formatDate(a) {
     const minut = String(date.getMinutes()).padStart(2, "0");
     
 
-    return `${yil}-${oy}-${kun} ${soat}:${minut}`;
+
+    switch(Number(oy)) {
+        case 1: return `${Number(kun)}-Yanvar`;break;
+        case 2: return `${Number(kun)}-Fevral`;break;
+        case 3: return `${Number(kun)}-Mart`;break;
+        case 4: return `${Number(kun)}-Aprel`;break;
+        case 5: return `${Number(kun)}-May`;break;
+        case 6: return `${Number(kun)}-Iyun`;break;
+        case 7: return `${Number(kun)}-Iyul`;break;
+        case 8: return `${Number(kun)}-Avgust`;break;
+        case 9: return `${Number(kun)}-Sentyabr`;break;
+        case 10: return `${Number(kun)}-Oktyabr`;break;
+        case 11: return `${Number(kun)}-Noyabr`;break;
+        case 12: return `${Number(kun)}-Dekabr`;break;
+    }
+
+
+    // return `${yil}-${oy}-${kun} ${soat}:${minut}`;
 }
 
 
@@ -536,32 +830,32 @@ bot.on('message', (msg) => {
             { header: "№", key: "id", width:5},
             { header: "Ism", key: "ism", width: 25},
             { header: "Familiya", key: "familiya", width: 25 },
-            { header: "Telegram Nick", key: "tg_nik", width: 22 },
-            { header: "Lesson 1", key: "lesson1", width: 22 },
-            { header: "Lesson 2", key: "lesson2", width: 22 },
-            { header: "Lesson 3", key: "lesson3", width: 22 },
-            { header: "Lesson 4", key: "lesson4", width: 22 },
-            { header: "Lesson 5", key: "lesson5", width: 22 },
-            { header: "Lesson 6", key: "lesson6", width: 22 },
-            { header: "Lesson 7", key: "lesson7", width: 22 },
-            { header: "Lesson 8", key: "lesson8", width: 22 },
-            { header: "Lesson 9", key: "lesson9", width: 22 },
-            { header: "Lesson 10", key: "lesson10", width: 22 },
-            { header: "Lesson 11", key: "lesson11", width: 22 },
-            { header: "Lesson 12", key: "lesson12", width: 22 },
-            { header: "Practice Test", key: "lesson25", width: 22 },
-            { header: "Lesson 13", key: "lesson13", width: 22 },
-            { header: "Lesson 14", key: "lesson14", width: 22 },
-            { header: "Lesson 15", key: "lesson15", width: 22 },
-            { header: "Lesson 16", key: "lesson16", width: 22 },
-            { header: "Lesson 17", key: "lesson17", width: 22 },
-            { header: "Lesson 18", key: "lesson18", width: 22 },
-            { header: "Lesson 19", key: "lesson19", width: 22 },
-            { header: "Lesson 20", key: "lesson20", width: 22 },
-            { header: "Lesson 21", key: "lesson21", width: 22 },
-            { header: "Lesson 22", key: "lesson22", width: 22 },
-            { header: "Lesson 23", key: "lesson23", width: 22 },
-            { header: "Lesson 24", key: "lesson24", width: 22 }
+            { header: "Telegram Nick", key: "tg_nik", width: 27 },
+            { header: "Lesson 1", key: "lesson1", width: 27 },
+            { header: "Lesson 2", key: "lesson2", width: 27 },
+            { header: "Lesson 3", key: "lesson3", width: 27 },
+            { header: "Lesson 4", key: "lesson4", width: 27 },
+            { header: "Lesson 5", key: "lesson5", width: 27 },
+            { header: "Lesson 6", key: "lesson6", width: 27 },
+            { header: "Lesson 7", key: "lesson7", width: 27 },
+            { header: "Lesson 8", key: "lesson8", width: 27 },
+            { header: "Lesson 9", key: "lesson9", width: 27 },
+            { header: "Lesson 10", key: "lesson10", width: 27 },
+            { header: "Lesson 11", key: "lesson11", width: 27 },
+            { header: "Lesson 12", key: "lesson12", width: 27 },
+            { header: "Practice Test", key: "lesson25", width: 27 },
+            { header: "Lesson 13", key: "lesson13", width: 27 },
+            { header: "Lesson 14", key: "lesson14", width: 27 },
+            { header: "Lesson 15", key: "lesson15", width: 27 },
+            { header: "Lesson 16", key: "lesson16", width: 27 },
+            { header: "Lesson 17", key: "lesson17", width: 27 },
+            { header: "Lesson 18", key: "lesson18", width: 27 },
+            { header: "Lesson 19", key: "lesson19", width: 27 },
+            { header: "Lesson 20", key: "lesson20", width: 27 },
+            { header: "Lesson 21", key: "lesson21", width: 27 },
+            { header: "Lesson 22", key: "lesson22", width: 27 },
+            { header: "Lesson 23", key: "lesson23", width: 27 },
+            { header: "Lesson 24", key: "lesson24", width: 27 }
             
             
         ];
