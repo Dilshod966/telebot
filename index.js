@@ -6,7 +6,7 @@ const { abort } = require('process');
 const { text } = require('stream/consumers');
 const xlsx = require('xlsx');
 // replace the value below with the Telegram token you receive from @BotFather
-const token = '7215925249:AAEbXKErOOJi5C2ZbufE5AmRqCG0ZwbPY9Y';
+const token = '7215925249:AAECPRIAZ9oQwf51LZF-61LKdDIp9c3LbCc';
 
 // Create a bot that uses 'polling' to fetch new updates
 const bot = new TelegramBot(token, {polling: true});
