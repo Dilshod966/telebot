@@ -4,9 +4,9 @@ const fs = require("fs");
 const path = require("path");
 const { abort } = require('process');
 const { text } = require('stream/consumers');
-
+const xlsx = require('xlsx');
 // replace the value below with the Telegram token you receive from @BotFather
-const token = '7215925249:AAG4NrInzF7R0YFkobEIFdQ4whWKFcuYaRg';
+const token = '7215925249:AAEbXKErOOJi5C2ZbufE5AmRqCG0ZwbPY9Y';
 
 // Create a bot that uses 'polling' to fetch new updates
 const bot = new TelegramBot(token, {polling: true});
@@ -400,8 +400,35 @@ bot.on('callback_query', msg => {
 
 let foydalanuvchi = [];
 let iddd = 1;
+exceldanOl()
+function exceldanOl() {
+    
+
+    // Excel faylni o‘qish
+    const workbook = xlsx.readFile('Natijalar.xlsx');
+
+    // Birinchi sahifani olish
+    const sheetName = workbook.SheetNames[0];
+    const worksheet = workbook.Sheets[sheetName];
+
+    // Ma’lumotni massivdagi obyektlar shaklida olish
+    const data = xlsx.utils.sheet_to_json(worksheet);
+    
+    
+    if(data.length != 0) {
+    data.forEach((value,index)=>{
+        foydalanuvchi[index] = value;
+
+        if(value.Practice_Test != undefined) foydalanuvchi[index].lesson25 = foydalanuvchi[index].Practice_Test;
+        
+        delete foydalanuvchi[index].Practice_Test;
+    })
+
+   
+    }
 
 
+}
 
 
 
@@ -444,12 +471,13 @@ bot.on('message', (msg) => {
     if(sell.length == 2 && !borliq) {
         
         foydalanuvchi.push({chat_id: chatId, id: iddd, tg_nik: msg.chat.username, ism: sell[0], familiya: sell[1], ishlajak_testi: 0})
+        yuborish2();
         iddd++;
         borliq = true;
         bot.sendMessage(chatId, text +`🙂 \nJavob bermoqchi bo'lgan testingizni tanlang`, tanlash);
     }
     else{
-        if(borliq && ishlajak_testi == 0 && lesson_ishlajak2) {
+        if(borliq && ishlajak_testi == 0 && text != '/start') {
             bot.sendMessage(chatId, `↪️ Iltimos javob bermoqchi bo'lgan\n testni tanlang`, tanlash);
         }
     }
@@ -610,7 +638,7 @@ bot.on('message', (msg) => {
         else {
             
             for(let i=1;i<=soni;i++) {
-                if(javoblar1[i-1] == javoblar[muom].abc[i-1] || javoblar1[i-1].toUpperCase == javoblar[muom].abc[i-1]) {
+                if(javoblar1[i-1] == javoblar[muom].abc[i-1] || javoblar1[i-1].toUpperCase() == javoblar[muom].abc[i-1]) {
                     umumiy++;
                     xatolar.push('   ' + i + ' ✅ ')
 
@@ -656,9 +684,10 @@ bot.on('message', (msg) => {
                                             }
                                         }
                                     });
-                    
+
+                                    yuborish2();         
                 ishlajak_testi = 0;
-                
+               
             }
             else {
                 bot.sendMessage(chatId, 'Sizning natijangiz:  ' + (umumiy*100/soni).toFixed(1) + '% 😔\nYana bir bor urunib koring.  👉 /start');
@@ -699,9 +728,9 @@ bot.on('message', (msg) => {
                     }
                 });
 
+           
 
-
-
+                yuborish2();
             }
         }
     }
@@ -728,7 +757,7 @@ bot.on('message', (msg) => {
         else bot.sendMessage(chatId, 'Assalomu alaykum 😊 \n\nIsm Familiya kiriting!.\n🔔 Elsatma kiritilgan Ism Familiyani \nozgartirishni iloji yuq. Masalan: 👇\nDilshodbek Bahodirov\n\n⚠️ Etiborliroq boling.');
     }
     else {
-        if (!borliq) bot.sendMessage(chatId, '🫵 Ism Familiya kiritmasangiz botdan \nfoydala olmaysiz. Masalan: 👇\nDilshodbek Bahodirov)');
+        if (!borliq) bot.sendMessage(chatId, '🫵 Ism Familiya kiritmasangiz botdan \nfoydala olmaysiz. Masalan: 👇\nDilshodbek Bahodirov');
     }
     
 
@@ -746,13 +775,13 @@ bot.on('message', (msg) => {
 
 
 
-bot.on("polling_error", (error) => {
-    console.error("❌ Polling xatosi yuz berdi!");
-    console.error("➡️ Xato kodi:", error.code || "Noma'lum");
-    console.error("➡️ HTTP Status:", error.response?.statusCode || "Noma'lum");
-    console.error("➡️ Xabar:", error.message || "Yo‘q");
-    console.error("➡️ Xato obyekti:", JSON.stringify(error, null, 2));
-});
+// bot.on("polling_error", (error) => {
+//     console.error("❌ Polling xatosi yuz berdi!");
+//     console.error("➡️ Xato kodi:", error.code || "Noma'lum");
+//     console.error("➡️ HTTP Status:", error.response?.statusCode || "Noma'lum");
+//     console.error("➡️ Xabar:", error.message || "Yo‘q");
+//     console.error("➡️ Xato obyekti:", JSON.stringify(error, null, 2));
+// });
 
 
 function formatDate(a) {
@@ -819,6 +848,7 @@ bot.on('message', (msg) => {
         });
         
         
+       
 
         async function createExcel() {
         const workbook = new ExcelJS.Workbook();
@@ -827,35 +857,36 @@ bot.on('message', (msg) => {
         // 1️⃣ Ustunlarni belgilash
         worksheet.columns = [
             
-            { header: "№", key: "id", width:5},
-            { header: "Ism", key: "ism", width: 25},
-            { header: "Familiya", key: "familiya", width: 25 },
-            { header: "Telegram Nick", key: "tg_nik", width: 27 },
-            { header: "Lesson 1", key: "lesson1", width: 27 },
-            { header: "Lesson 2", key: "lesson2", width: 27 },
-            { header: "Lesson 3", key: "lesson3", width: 27 },
-            { header: "Lesson 4", key: "lesson4", width: 27 },
-            { header: "Lesson 5", key: "lesson5", width: 27 },
-            { header: "Lesson 6", key: "lesson6", width: 27 },
-            { header: "Lesson 7", key: "lesson7", width: 27 },
-            { header: "Lesson 8", key: "lesson8", width: 27 },
-            { header: "Lesson 9", key: "lesson9", width: 27 },
-            { header: "Lesson 10", key: "lesson10", width: 27 },
-            { header: "Lesson 11", key: "lesson11", width: 27 },
-            { header: "Lesson 12", key: "lesson12", width: 27 },
-            { header: "Practice Test", key: "lesson25", width: 27 },
-            { header: "Lesson 13", key: "lesson13", width: 27 },
-            { header: "Lesson 14", key: "lesson14", width: 27 },
-            { header: "Lesson 15", key: "lesson15", width: 27 },
-            { header: "Lesson 16", key: "lesson16", width: 27 },
-            { header: "Lesson 17", key: "lesson17", width: 27 },
-            { header: "Lesson 18", key: "lesson18", width: 27 },
-            { header: "Lesson 19", key: "lesson19", width: 27 },
-            { header: "Lesson 20", key: "lesson20", width: 27 },
-            { header: "Lesson 21", key: "lesson21", width: 27 },
-            { header: "Lesson 22", key: "lesson22", width: 27 },
-            { header: "Lesson 23", key: "lesson23", width: 27 },
-            { header: "Lesson 24", key: "lesson24", width: 27 }
+            { header: "id", key: "id", width:5},
+            { header: "ism", key: "ism", width: 25},
+            { header: "familiya", key: "familiya", width: 25 },
+            { header: "chat_id", key: "chat_id", width: 0.1 },
+            { header: "tg_nik", key: "tg_nik", width: 27 },
+            { header: "lesson1", key: "lesson1", width: 27 },
+            { header: "lesson2", key: "lesson2", width: 27 },
+            { header: "lesson3", key: "lesson3", width: 27 },
+            { header: "lesson4", key: "lesson4", width: 27 },
+            { header: "lesson5", key: "lesson5", width: 27 },
+            { header: "lesson6", key: "lesson6", width: 27 },
+            { header: "lesson7", key: "lesson7", width: 27 },
+            { header: "lesson8", key: "lesson8", width: 27 },
+            { header: "lesson9", key: "lesson9", width: 27 },
+            { header: "lesson10", key: "lesson10", width: 27 },
+            { header: "lesson11", key: "lesson11", width: 27 },
+            { header: "lesson12", key: "lesson12", width: 27 },
+            { header: "Practice_Test", key: "lesson25", width: 27 },
+            { header: "lesson13", key: "lesson13", width: 27 },
+            { header: "lesson14", key: "lesson14", width: 27 },
+            { header: "lesson15", key: "lesson15", width: 27 },
+            { header: "lesson16", key: "lesson16", width: 27 },
+            { header: "lesson17", key: "lesson17", width: 27 },
+            { header: "lesson18", key: "lesson18", width: 27 },
+            { header: "lesson19", key: "lesson19", width: 27 },
+            { header: "lesson20", key: "lesson20", width: 27 },
+            { header: "lesson21", key: "lesson21", width: 27 },
+            { header: "lesson22", key: "lesson22", width: 27 },
+            { header: "lesson23", key: "lesson23", width: 27 },
+            { header: "lesson24", key: "lesson24", width: 27 }
             
             
         ];
@@ -878,10 +909,17 @@ bot.on('message', (msg) => {
         });
     // 2️⃣ Ma'lumotlar
         
-
+   
             // 3️⃣ Har bir obyektni qo‘shish
-            foydalanuvchi.forEach((row) => {
+            foydalanuvchi.forEach((row,index) => {
                 worksheet.addRow(row);
+       
+       
+                
+       
+       
+       
+       
             });
 
             // 4️⃣ Faylni saqlash
@@ -896,16 +934,15 @@ bot.on('message', (msg) => {
 
 
 
-
             function yuborish() {
 
 
                 
                 const chatId = msg.chat.id;
-
+            
                 
                 const filePath2 = path.join(__dirname, "Natijalar.xlsx");
-
+            
                 // Faylni yuborish
                 bot.sendDocument(chatId, fs.createReadStream(filePath2),{
                     contentType: "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet"
@@ -916,11 +953,12 @@ bot.on('message', (msg) => {
                     .catch((err) => {
                         console.error("❌ Xatolik yuz berdi333333:", err);
                     });
-
+                    exceldanOl();
+            
             }
 
             setTimeout(yuborish, 2000);
-          
+           
             
             
 
@@ -931,3 +969,108 @@ bot.on('message', (msg) => {
 
     }
 })
+
+
+
+
+
+
+
+function yuborish2() {
+    // Fayl nomi
+ const filePath = "Natijalar.xlsx";
+        
+ // Faylni o'chirish
+ fs.unlink(filePath, (err) => {
+     if (err) {
+         console.error("❌ Faylni o‘chirishda xatolik:", err);
+     } else {
+         console.log("✅ Fayl muvaffaqiyatli o‘chirildi!");
+     }
+ });
+ 
+ 
+
+
+ async function createExcel() {
+ const workbook = new ExcelJS.Workbook();
+ const worksheet = workbook.addWorksheet("Natijalar");
+
+ // 1️⃣ Ustunlarni belgilash
+ worksheet.columns = [
+     
+     { header: "id", key: "id", width:5},
+     { header: "ism", key: "ism", width: 25},
+     { header: "familiya", key: "familiya", width: 25 },
+     { header: "chat_id", key: "chat_id", width: 0.1 },
+     { header: "tg_nik", key: "tg_nik", width: 27 },
+     { header: "lesson1", key: "lesson1", width: 27 },
+     { header: "lesson2", key: "lesson2", width: 27 },
+     { header: "lesson3", key: "lesson3", width: 27 },
+     { header: "lesson4", key: "lesson4", width: 27 },
+     { header: "lesson5", key: "lesson5", width: 27 },
+     { header: "lesson6", key: "lesson6", width: 27 },
+     { header: "lesson7", key: "lesson7", width: 27 },
+     { header: "lesson8", key: "lesson8", width: 27 },
+     { header: "lesson9", key: "lesson9", width: 27 },
+     { header: "lesson10", key: "lesson10", width: 27 },
+     { header: "lesson11", key: "lesson11", width: 27 },
+     { header: "lesson12", key: "lesson12", width: 27 },
+     { header: "Practice_Test", key: "lesson25", width: 27 },
+     { header: "lesson13", key: "lesson13", width: 27 },
+     { header: "lesson14", key: "lesson14", width: 27 },
+     { header: "lesson15", key: "lesson15", width: 27 },
+     { header: "lesson16", key: "lesson16", width: 27 },
+     { header: "lesson17", key: "lesson17", width: 27 },
+     { header: "lesson18", key: "lesson18", width: 27 },
+     { header: "lesson19", key: "lesson19", width: 27 },
+     { header: "lesson20", key: "lesson20", width: 27 },
+     { header: "lesson21", key: "lesson21", width: 27 },
+     { header: "lesson22", key: "lesson22", width: 27 },
+     { header: "lesson23", key: "lesson23", width: 27 },
+     { header: "lesson24", key: "lesson24", width: 27 }
+     
+     
+ ];
+
+
+ worksheet.getRow(1).eachCell((cell) => {
+     cell.font = { bold: true, color: { argb: "FFFFFF" }, size: 14 }; // Oq rang
+     cell.fill = {
+         type: "pattern",
+         pattern: "solid",
+         fgColor: { argb: "808080" } // Moviy fon
+     };
+     cell.alignment = { horizontal: "center" };
+     cell.border = {
+         top: { style: "thin" },
+         left: { style: "thin" },
+         bottom: { style: "thin" },
+         right: { style: "thin" }
+     };
+ });
+// 2️⃣ Ma'lumotlar
+
+     // 3️⃣ Har bir obyektni qo‘shish
+     foydalanuvchi.forEach((row,index) => {
+         worksheet.addRow(row);
+
+
+         
+
+
+
+
+     });
+
+     // 4️⃣ Faylni saqlash
+     await workbook.xlsx.writeFile("Natijalar.xlsx");
+     
+ }
+
+
+     createExcel();
+
+}
+
+yuborish2();

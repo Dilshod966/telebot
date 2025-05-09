@@ -3,7 +3,8 @@
     "exceljs": "^4.4.0",
     "fs": "^0.0.1-security",
     "node-telegram-bot-api": "^0.66.0",
-    "path": "^0.12.7"
+    "path": "^0.12.7",
+    "xlsx": "^0.18.5"
   },
   "name": "tg-bot-new",
   "version": "1.0.0",
